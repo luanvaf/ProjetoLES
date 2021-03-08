@@ -1,0 +1,48 @@
+version: '2'
+ 
+services:
+  postgresserver:
+    image: postgres:latest
+    container_name: 
+      db
+    restart: always
+    ports:
+      - 5432:5432
+    environment: 
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_DB: "clinica-dev"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U radix"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+ 
+  api:
+    image: api
+    container_name: 
+      api
+    ports:
+      - 5000:5000
+    environment: 
+      CONNECTION: "User ID=postgres;Password=docker;Host=postgresserver;Port=5432;Database=ClinicaDev;Pooling=true;"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - postgresserver
+    depends_on:
+      postgresserver:
+        condition: service_healthy
+    command: ["./wait-for-it.sh", "postgresserver:5432", "--", "python", "app.py"]  
+    networks:
+      - mynetwork
+volumes:
+  pgdata:
+networks:
+  mynetwork:
+     driver: bridge
