@@ -64,6 +64,15 @@ namespace Api.Core
                     .AddCryptographInjection()
                     .AddAutoMapper(typeof(Startup));
 
+            var urlCors = "http://localhost:3000";
+            services.AddCors(options =>
+               options.AddPolicy("CorsPolicy",
+                   builder =>
+                       builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithOrigins(urlCors)
+                       .AllowCredentials()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,6 +105,8 @@ namespace Api.Core
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

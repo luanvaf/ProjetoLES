@@ -1,27 +1,44 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import api from '../../services/api';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import './styles.css';
+import Professor from '../../interfaces/professor';
+import Resident from '../../interfaces/resident';
+import Doctor from '../../interfaces/doctor';
 
 const RegisterDoctor: React.FC = () => {
     const [selectedDoctorType, setSelectedDoctorType] = useState('0');
     const [doctorsType] = useState<string[]>(['Residente', 'Professor', 'Profissional']);
-
-    const [formData, setFormData] = useState({
-        nome: '',
-        crm: '',
-        titulacao: '',
-        anosResidencia: '',
-        senha: '',
-        senhaConfirmar: ''
+    const [formProfessor, setProfessor] = useState<Professor>({
+        CompleteName: '',
+        ConfirmPassword: '',
+        Crm: '',
+        Password: '',
+        Titulation: ''
+    });
+    const [formResident, setResident] = useState<Resident>({
+        CompleteName: '',
+        ConfirmPassword: '',
+        Crm: '',
+        Password: '',
+        ResidenceYear: 0
+    });
+    const [formDoctor, setDoctor] = useState<Doctor>({
+        CompleteName: '',
+        ConfirmPassword: '',
+        Crm: '',
+        Password: ''
     });
 
     const history = useHistory();
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        setResident({ ...formResident, [name]: value });
+        setDoctor({ ...formDoctor, [name]: value });
+        setProfessor({ ...formProfessor, [name]: value });
     }
 
     function handleSelectType(event: ChangeEvent<HTMLSelectElement>) {
@@ -32,62 +49,59 @@ const RegisterDoctor: React.FC = () => {
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        const { nome, crm, titulacao, anosResidencia, senha, senhaConfirmar } = formData;
-        const data = new FormData();
-
         switch (selectedDoctorType) {
             case 'Residente':
-                data.append('CompleteName', nome);
-                data.append('Crm', crm);
-                data.append('ResidenceYear', anosResidencia);
-                data.append('Password', senha);
-                data.append('ConfirmPassword', senhaConfirmar);
-                await api.post('/api/User/resident', data)
-                    .then((response) => {
-                        console.log(response);
+                await api.post('/api/User/resident', formResident)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Médico Cadastrado com Sucesso!'
+                        })
                     })
-                    .catch(function (error) {
-                        if (error.response) {
-                            console.log(error.response);
-                        }
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Médico não Cadastrado!',
+                            text: 'Tente novamente mais tarde'
+                        })
                     });
                 return history.push('/');
 
             case 'Professor':
-                data.append('CompleteName', nome);
-                data.append('Crm', crm);
-                data.append('Titulation', titulacao);
-                data.append('Password', senha);
-                data.append('ConfirmPassword', senhaConfirmar);
-                await api.post('/api/User/professor', data)
-                    .then((response) => {
-                        alert(response.data)
+                await api.post('/api/User/professor', formProfessor)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Médico Cadastrado com Sucesso!'
+                        })
                     })
-                    .catch(function (error) {
-                        if (error.response) {
-                            alert(error.response.data)
-                        }
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Médico não Cadastrado!',
+                            text: 'Tente novamente mais tarde'
+                        })
                     });
                 return history.push('/');
 
             default:
-                data.append('CompleteName', nome);
-                data.append('Crm', crm);
-                data.append('Password', senha);
-                data.append('ConfirmPassword', senhaConfirmar);
-                await api.post('/api/User/doctor', data)
-                    .then((response) => {
-                        alert(response.data)
+                await api.post('/api/User/doctor', formDoctor)
+                    .then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Médico Cadastrado com Sucesso!'
+                        })
                     })
-                    .catch(function (error) {
-                        if (error.response) {
-                            alert(error.response.data)
-                        }
+                    .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Médico não Cadastrado!',
+                            text: 'Tente novamente mais tarde'
+                        })
                     });
                 return history.push('/');
         }
     }
-
 
     return (
         <div id="page-register-doctor">
@@ -98,21 +112,23 @@ const RegisterDoctor: React.FC = () => {
                 <fieldset>
                     <div className="field-group">
                         <div className="field">
-                            <label htmlFor="nome">Nome</label>
+                            <label htmlFor="CompleteName">Nome</label>
                             <input
                                 type="text"
-                                name="nome"
-                                id="name"
+                                name="CompleteName"
+                                id="CompleteName"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="field">
-                            <label htmlFor="crm">CRM</label>
+                            <label htmlFor="Crm">CRM</label>
                             <input
                                 type="number"
-                                name="crm"
-                                id="crm"
+                                name="Crm"
+                                id="Crm"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                     </div>
@@ -123,8 +139,9 @@ const RegisterDoctor: React.FC = () => {
                             id="tipo"
                             value={selectedDoctorType}
                             onChange={handleSelectType}
+                            required
                         >
-                            <option value="0">Selecione um tipo</option>
+                            <option value="">Selecione um tipo</option>
                             {doctorsType.map(doctor => (
                                 <option key={doctor} value={doctor}>{doctor}</option>
                             ))}
@@ -132,12 +149,13 @@ const RegisterDoctor: React.FC = () => {
                     </div>
                     {selectedDoctorType === 'Professor' ? (
                         <div className="field">
-                            <label htmlFor="titulacao">Titutalação</label>
+                            <label htmlFor="Titulation">Titutalação</label>
                             <input
                                 type="text"
-                                name="titulacao"
-                                id="titulacao"
+                                name="Titulation"
+                                id="Titulation"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                     ) : (
@@ -145,12 +163,13 @@ const RegisterDoctor: React.FC = () => {
                     )}
                     {selectedDoctorType === 'Residente' ? (
                         <div className="field">
-                            <label htmlFor="anosResidencia">Anos de Residência</label>
+                            <label htmlFor="ResidenceYear">Anos de Residência</label>
                             <input
                                 type="number"
-                                name="anosResidencia"
-                                id="anosResidencia"
+                                name="ResidenceYear"
+                                id="ResidenceYear"
                                 onChange={handleInputChange}
+                                required min={1} max={4}
                             />
                         </div>
                     ) : (
@@ -158,21 +177,23 @@ const RegisterDoctor: React.FC = () => {
                     )}
                     <div className="field-group">
                         <div className="field">
-                            <label htmlFor="senha">Senha</label>
+                            <label htmlFor="Password">Senha</label>
                             <input
                                 type="password"
-                                name="senha"
-                                id="senha"
+                                name="Password"
+                                id="Password"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="field">
-                            <label htmlFor="senhaConfirmar">Confirmar Senha</label>
+                            <label htmlFor="ConfirmPassword">Confirmar Senha</label>
                             <input
                                 type="password"
-                                name="senhaConfirmar"
-                                id="senhaConfirmar"
+                                name="ConfirmPassword"
+                                id="ConfirmPassword"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                     </div>

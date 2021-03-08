@@ -1,35 +1,37 @@
 import React, { FormEvent, ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 import { useAuth } from '../../contexts/auth';
+import Auth from '../../interfaces/auth';
 
 import './styles.css';
 
 const Login: React.FC = () => {
     const contextAuth = useAuth();
 
-    const [formData, setFormData] = useState({
-        login: '',
-        senha: '',
+    const [formAuth, setAuth] = useState<Auth>({
+        Crm: '',
+        Password: ''
     });
 
     const history = useHistory();
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        setAuth({ ...formAuth, [name]: value });
     }
 
     async function handleSignIn(event: FormEvent) {
         event.preventDefault();
 
-        const { login, senha } = formData;
-        const data = new FormData();
-
-        data.append('Crm', login);
-        data.append('Password', senha);
-
-        contextAuth.Login(login, senha);
+        contextAuth.Login(formAuth.Crm, formAuth.Password)
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Cmr ou Senha inválido!',
+                    text: 'Tente novamente'
+                })
+            });
         history.push('/');
     }
 
@@ -38,28 +40,30 @@ const Login: React.FC = () => {
             <header></header>
 
             <form onSubmit={handleSignIn}>
-                <h1>Cadastro dos Médicos</h1>
+                <h1>Login</h1>
                 <fieldset>
                     <div className="field">
-                        <label htmlFor="login">Login</label>
+                        <label htmlFor="Crm">Crm</label>
                         <input
-                            type="text"
-                            name="login"
-                            id="login"
+                            type="number"
+                            name="Crm"
+                            id="Crm"
                             onChange={handleInputChange}
+                            required
                         />
                     </div>
                     <div className="field">
-                        <label htmlFor="senha">Senha</label>
+                        <label htmlFor="Password">Senha</label>
                         <input
                             type="password"
-                            name="senha"
-                            id="senha"
+                            name="Password"
+                            id="Password"
                             onChange={handleInputChange}
+                            required
                         />
                     </div>
                 </fieldset>
-                
+
                 <button type="submit">
                     Entrar
                 </button>
