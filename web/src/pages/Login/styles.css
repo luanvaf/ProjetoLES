@@ -51,6 +51,7 @@
 }
 
 #page-login form .field input[type=text],
+#page-login form .field input[type=number],
 #page-login form .field input[type=password] {
     flex: 1;
     background: #F0F0F5;
