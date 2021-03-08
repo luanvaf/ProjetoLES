@@ -1,4 +1,6 @@
 ﻿using Domain.Dtos.Helps;
+using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Dtos.Inputs
 {
@@ -12,5 +14,16 @@ namespace Domain.Dtos.Inputs
         /// Titulação
         /// </summary>
         public string Titulation { get; set; }
+        public override User ToUser()
+        {
+            return new Professor
+            {
+                Name = this.CompleteName,
+                Password = this.Password,
+                Titulation = this.Titulation,
+                Crm = this.Crm,
+                RoleId = (UserRoleType)this.Role
+            };
+        }
     }
 }

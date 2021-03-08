@@ -1,4 +1,6 @@
 ﻿using Domain.Dtos.Helps;
+using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Dtos.Inputs
 {
@@ -12,5 +14,17 @@ namespace Domain.Dtos.Inputs
         /// Ano de residencia
         /// </summary>
         public DtoResidenceYearType ResidenceYear { get; set; }
+        public override User ToUser()
+        {
+            return new Resident
+            {
+                Name = this.CompleteName,
+                Password = this.Password,
+                ResidenceYear = (ResidenceYear)this.ResidenceYear,
+                Crm = this.Crm,
+                RoleId = (UserRoleType)this.Role
+            };
+
+        }
     }
 }

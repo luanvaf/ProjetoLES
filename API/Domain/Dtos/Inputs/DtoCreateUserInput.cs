@@ -1,4 +1,5 @@
 ﻿using Domain.Dtos.Helps;
+using Domain.Entities;
 using System.Text.Json.Serialization;
 
 namespace Domain.Dtos.Inputs
@@ -6,7 +7,7 @@ namespace Domain.Dtos.Inputs
     /// <summary>
     /// Dto responsável por receber os dados de criação do usuário
     /// </summary>
-    public class DtoCreateUserInput
+    public abstract class DtoCreateUserInput
     {
         /// <summary>
         /// Nome completo
@@ -26,6 +27,8 @@ namespace Domain.Dtos.Inputs
         public string ConfirmPassword { get; set; }
         [JsonIgnore]
         public DtoUserRoleType Role { get;  protected set; }
+
+        public abstract User ToUser();
 
     }
 }

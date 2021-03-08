@@ -43,21 +43,8 @@ namespace Service.Services
             if (createUserInput.Password != createUserInput.ConfirmPassword)
                 return GenerateErroServiceResponse("As senhas não coincidem.");
 
-            User newUser;
-            switch (createUserInput.Role)
-            {
-                case DtoUserRoleType.Resident:
-                    newUser = _mapper.Map<Resident>(createUserInput);
-                    break;
-                case DtoUserRoleType.Professor:
-                    newUser = _mapper.Map<Professor>(createUserInput);
-                    break;
-                case DtoUserRoleType.Doctor:
-                    newUser = _mapper.Map<Doctor>(createUserInput);
-                    break;
-                default:
-                    return GenerateErroServiceResponse("O cargo informado não existe.");
-            }
+            User newUser = createUserInput.ToUser();
+
             newUser.Password = _cryptograph.EncryptPassword(newUser.Password);
 
             var createdUser = await _userRepository.Insert(newUser);
