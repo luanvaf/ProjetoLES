@@ -1,5 +1,7 @@
 ﻿using Domain.Dtos.Inputs;
 using Domain.Interfaces.Services;
+using Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 namespace Api.Rnc.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = nameof(UserRoleType.Administrator))]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -23,6 +26,7 @@ namespace Api.Rnc.Controllers
         [HttpPost("resident")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CreateResident([FromBody] DtoCreateResidentInput dtoCreateResidentInput)
         {
             var createUserServiceResponse = await _createUserService.Execute(dtoCreateResidentInput);
@@ -39,6 +43,7 @@ namespace Api.Rnc.Controllers
         [HttpPost("professor")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CreateProfessor([FromBody] DtoCreateProfessorInput dtoCreateProfessorInput)
         {
             var createUserServiceResponse = await _createUserService.Execute(dtoCreateProfessorInput);
@@ -56,6 +61,7 @@ namespace Api.Rnc.Controllers
         [HttpPost("doctor")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CreateDoctor([FromBody] DtoCreateDoctorInput dtoCreateDoctorInput)
         {
             var createUserServiceResponse = await _createUserService.Execute(dtoCreateDoctorInput);
