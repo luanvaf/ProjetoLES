@@ -1,0 +1,38 @@
+#page-home {
+    width: 100%;
+    max-width: 1100px;
+  
+    margin: 0 auto;
+}
+
+#page-home header {
+    margin-top: 48px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#page-home h1 {
+    font-size: 36px;
+}
+
+#page-home button {
+    width: 260px;
+    height: 56px;
+    background: grey;
+    border-radius: 8px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    align-self: flex-end;
+    margin-top: 40px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+  
+#page-home button:hover {
+    background: #2FB86E;
+}
