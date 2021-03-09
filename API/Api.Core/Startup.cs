@@ -34,6 +34,15 @@ namespace Api.Core
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            var urlCors = "http://localhost:3000";
+            services.AddCors(options =>
+               options.AddPolicy("CorsPolicy",
+                   builder =>
+                       builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithOrigins(urlCors)
+                       .AllowCredentials()));
+
             var JWT_SECRET_KEY = Configuration.GetValue<string>("CryptographConfig:JwtSecretKey");
 
             services.AddAuthentication(x =>
@@ -63,16 +72,6 @@ namespace Api.Core
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()
                     .AddAutoMapper(typeof(Startup));
-
-            var urlCors = "http://localhost:3000";
-            services.AddCors(options =>
-               options.AddPolicy("CorsPolicy",
-                   builder =>
-                       builder.AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .WithOrigins(urlCors)
-                       .AllowCredentials()));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,10 +102,10 @@ namespace Api.Core
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
