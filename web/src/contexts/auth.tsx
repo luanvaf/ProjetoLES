@@ -22,7 +22,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         setUser(response.data.user);
         setRole(response.data.role);
-        //api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+        api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
     }
 
     return (
