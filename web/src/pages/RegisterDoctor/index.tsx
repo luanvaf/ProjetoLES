@@ -57,6 +57,7 @@ const RegisterDoctor: React.FC = () => {
                             icon: 'success',
                             title: 'Médico Cadastrado com Sucesso!'
                         })
+                        history.push('/');
                     })
                     .catch(() => {
                         Swal.fire({
@@ -65,7 +66,7 @@ const RegisterDoctor: React.FC = () => {
                             text: 'Tente novamente mais tarde'
                         })
                     });
-                return history.push('/');
+                break;
 
             case 'Professor':
                 await api.post('/api/User/professor', formProfessor)
@@ -74,6 +75,7 @@ const RegisterDoctor: React.FC = () => {
                             icon: 'success',
                             title: 'Médico Cadastrado com Sucesso!'
                         })
+                        history.push('/');
                     })
                     .catch(() => {
                         Swal.fire({
@@ -82,7 +84,7 @@ const RegisterDoctor: React.FC = () => {
                             text: 'Tente novamente mais tarde'
                         })
                     });
-                return history.push('/');
+                break;
 
             default:
                 await api.post('/api/User/doctor', formDoctor)
@@ -91,6 +93,7 @@ const RegisterDoctor: React.FC = () => {
                             icon: 'success',
                             title: 'Médico Cadastrado com Sucesso!'
                         })
+                        history.push('/');
                     })
                     .catch(() => {
                         Swal.fire({
@@ -99,7 +102,7 @@ const RegisterDoctor: React.FC = () => {
                             text: 'Tente novamente mais tarde'
                         })
                     });
-                return history.push('/');
+                break;
         }
     }
 
