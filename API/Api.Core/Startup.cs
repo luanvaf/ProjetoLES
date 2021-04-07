@@ -1,12 +1,15 @@
 using Api.Core.Extensions;
 using Data.Core.Context;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Api.Core
 {
@@ -31,6 +34,35 @@ namespace Api.Core
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            var urlCors = "http://localhost:3000";
+            services.AddCors(options =>
+               options.AddPolicy("CorsPolicy",
+                   builder =>
+                       builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithOrigins(urlCors)
+                       .AllowCredentials()));
+
+            var JWT_SECRET_KEY = Configuration.GetValue<string>("CryptographConfig:JwtSecretKey");
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+             .AddJwtBearer(x =>
+             {
+                 x.RequireHttpsMetadata = false;
+                 x.SaveToken = true;
+                 x.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JWT_SECRET_KEY)),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+             });
+
             services.AddDbContexts(Configuration)
                     .AddCustomSwaggerGen()
                     .AddCustomConfiguration(Configuration)
@@ -40,7 +72,6 @@ namespace Api.Core
                     .AddRepositoriesInjections()
                     .AddCryptographInjection()
                     .AddAutoMapper(typeof(Startup));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +102,9 @@ namespace Api.Core
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
