@@ -17,6 +17,7 @@ namespace Api.Core.Extensions
         public static IServiceCollection AddRepositoriesInjections(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
             return services;
         }
     }

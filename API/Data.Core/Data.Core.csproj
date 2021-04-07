@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20210306215940_createUsersTabl.Designer.cs" />
     <Compile Remove="Migrations\20210306221448_createUserTable.cs" />
     <Compile Remove="Migrations\20210306221448_createUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20210407175016_patientTable.cs" />
+    <Compile Remove="Migrations\20210407175016_patientTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

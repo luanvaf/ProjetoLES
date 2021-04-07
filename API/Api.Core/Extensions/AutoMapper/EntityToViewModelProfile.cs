@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.Dtos.Inputs;
+using Domain.Entities;
 
 namespace Api.Core.Extensions.AutoMapper
 {
@@ -12,7 +14,8 @@ namespace Api.Core.Extensions.AutoMapper
         /// </summary>
         public EntityToViewModelProfile()
         {
-
+            CreateMap<DtoCreatePatientInput, Patient>();
+            CreateMap<DtoAddress, Address>();
         }
     }
 }

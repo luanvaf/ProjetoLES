@@ -12,10 +12,18 @@ namespace Data.Core.Context
     {
         private readonly ICryptograph _cryptograph;
         public DbSet<User> Users{ get; private set; }
+        public DbSet<Address> Address { get; private set; }
+        public DbSet<Administrator> Administrator { get; private set; }
+        public DbSet<Doctor> Doctor { get; private set; }
+        public DbSet<Patient> Patient { get; private set; }
+        public DbSet<Professor> Professor { get; private set; }
+        public DbSet<Resident> Resident { get; private set; }
+        
         public CoreContext(DbContextOptions<CoreContext> options, ICryptograph cryptograph) : base(options) 
         {
             _cryptograph = cryptograph;
         }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
