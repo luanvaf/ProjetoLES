@@ -5,6 +5,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        Task<User> GetByCrm(string crm);
+        Task<User> GetByLogin(string login);
     }
 }

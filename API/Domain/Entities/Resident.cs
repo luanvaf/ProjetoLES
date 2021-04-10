@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Resident : User
+    public class Resident : Doctor
     {
         public Resident()
         {

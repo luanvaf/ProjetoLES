@@ -5,14 +5,15 @@ namespace Domain.Entities
 {
     public class User : Entity<Guid>
     {
+
         /// <summary>
         /// Nome completo
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Crm
+        /// Login
         /// </summary>
-        public string Crm { get; set; }
+        public string Login { get; set; }
         /// <summary>
         /// Senha
         /// </summary>

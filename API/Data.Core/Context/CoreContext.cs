@@ -50,7 +50,7 @@ namespace Data.Core.Context
             modelBuilder.Entity<Administrator>().HasData(new Administrator
             {
                 Id = Guid.Parse("319e2862-5c31-477a-9eeb-d84db67b2fc5"),
-                Crm = "999999",
+                Login = "999999",
                 Name = "administrador",
                 CreatedAt = DateTime.Now,
                 Password = _cryptograph.EncryptPassword("abc123")

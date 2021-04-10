@@ -8,5 +8,10 @@ namespace Domain.Entities
         {
             this.RoleId = UserRoleType.Doctor;
         }
+
+        /// <summary>
+        /// Crm
+        /// </summary>
+        public string Crm { get; set; }
     }
 }

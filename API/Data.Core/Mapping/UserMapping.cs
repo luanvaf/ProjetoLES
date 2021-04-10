@@ -19,7 +19,7 @@ namespace Data.Core.Mapping
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(x => x.Crm)
+            builder.Property(x => x.Login)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -27,7 +27,7 @@ namespace Data.Core.Mapping
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.HasIndex(x => x.Crm)
+            builder.HasIndex(x => x.Login)
                 .IsUnique();
 
             builder.Property(x => x.RoleId)

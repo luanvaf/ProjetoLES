@@ -14,7 +14,11 @@ namespace Domain.Dtos.Inputs
         /// </summary>
         public string CompleteName { get; set; }
         /// <summary>
-        /// Email
+        /// Login
+        /// </summary>
+        public string Login { get; set; }
+        /// <summary>
+        /// Crm
         /// </summary>
         public string Crm { get; set; }
         /// <summary>

@@ -3,9 +3,9 @@
     public class DtoCreateAuthInput
     {
         /// <summary>
-        /// Crm
+        /// Login
         /// </summary>
-        public string Crm { get; set; }
+        public string Login { get; set; }
         /// <summary>
         /// Senha
         /// </summary>

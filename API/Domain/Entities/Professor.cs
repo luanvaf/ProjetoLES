@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Professor : User
+    public class Professor : Doctor
     {
         public Professor()
         {

@@ -31,7 +31,7 @@ namespace Service.Services
         }
         public async Task<ResponseService<DtoCreateAuthResponse>> Execute(DtoCreateAuthInput dtoCreateAuth)
         {
-            var existingAuth = await _userRepository.GetByCrm(dtoCreateAuth.Crm);
+            var existingAuth = await _userRepository.GetByLogin(dtoCreateAuth.Login);
 
             if (existingAuth != null)
             {
@@ -61,7 +61,6 @@ namespace Service.Services
                     var user = new DtoUser
                     {
                         CompleteName = existingAuth.Name,
-                        Crm = existingAuth.Crm,
                     };
 
                     var authResult = new DtoCreateAuthResponse { User = user, Token = tokenHandler.WriteToken(token), Role = existingAuth.RoleId.ToString() };

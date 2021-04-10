@@ -3,6 +3,7 @@ using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Core.Repositories
 {
@@ -18,7 +19,7 @@ namespace Data.Core.Repositories
         /// </summary>
         /// <param name="crm"></param>
         /// <returns></returns>
-        public async Task<User> GetByCrm(string crm) =>
-             await Task.FromResult(_context.Users.FirstOrDefault());
+        public async Task<User> GetByLogin(string login) =>
+             await _context.Users.FirstOrDefaultAsync(x => x.Login == login);
     }
 } 

@@ -5,29 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210306064403_createUserTable.cs" />
-    <Compile Remove="Migrations\20210306064403_createUserTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306064954_createUserTable.cs" />
-    <Compile Remove="Migrations\20210306064954_createUserTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306190957_createUserTableDoctorTableResidentTableAndProfessorTable.cs" />
-    <Compile Remove="Migrations\20210306190957_createUserTableDoctorTableResidentTableAndProfessorTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306192045_createUserTableDoctorTableResidentTableAndProfessorTable.cs" />
-    <Compile Remove="Migrations\20210306192045_createUserTableDoctorTableResidentTableAndProfessorTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306192511_createUserTableDoctorTableResidentTableAndProfessorTable.cs" />
-    <Compile Remove="Migrations\20210306192511_createUserTableDoctorTableResidentTableAndProfessorTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306192724_createUserTableDoctorTableResidentTableAndProfessorTable.cs" />
-    <Compile Remove="Migrations\20210306192724_createUserTableDoctorTableResidentTableAndProfessorTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306215838_createUsersTable.cs" />
-    <Compile Remove="Migrations\20210306215838_createUsersTable.Designer.cs" />
-    <Compile Remove="Migrations\20210306215940_createUsersTabl.cs" />
-    <Compile Remove="Migrations\20210306215940_createUsersTabl.Designer.cs" />
-    <Compile Remove="Migrations\20210306221448_createUserTable.cs" />
-    <Compile Remove="Migrations\20210306221448_createUserTable.Designer.cs" />
-    <Compile Remove="Migrations\20210407175016_patientTable.cs" />
-    <Compile Remove="Migrations\20210407175016_patientTable.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.12">
       <PrivateAssets>all</PrivateAssets>

@@ -34,11 +34,11 @@ namespace Service.Services
         public async Task<ResponseService> Execute<T>(T createUserInput)
             where T : DtoCreateUserInput
         {
-            var hasUserWithEmail = await _userRepository
-                .GetAll(x => x.Crm == createUserInput.Crm);
+            var hasUserWithLogin = await _userRepository
+                .GetAll(x => x.Login == createUserInput.Login);
 
-            if (hasUserWithEmail != null && hasUserWithEmail.Any())
-                return GenerateErroServiceResponse("A crm já está em uso.");
+            if (hasUserWithLogin != null && hasUserWithLogin.Any())
+                return GenerateErroServiceResponse("A login já está em uso.");
 
             if (createUserInput.Password != createUserInput.ConfirmPassword)
                 return GenerateErroServiceResponse("As senhas não coincidem.");
