@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -11,5 +13,6 @@ namespace Domain.Entities
         public string Phone { get; set; }
         public Guid AddressId { get; set; }
         public virtual Address Address { get; set; }
+        public virtual IEnumerable<MedicalConsultation> MedicalConsultations{ get; set; }
     }
 }
