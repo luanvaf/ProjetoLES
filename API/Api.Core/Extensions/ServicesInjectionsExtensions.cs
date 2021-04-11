@@ -19,6 +19,8 @@ namespace Api.Core.Extensions
         {
             services.AddScoped<ICreateUserService, CreateUserService>();
             services.AddScoped<ICreateAuthService, CreateAuthService>();
+            services.AddScoped<IAddMedicalConsultationService, AddMedicalConsultationService>();
+            services.AddScoped<ICreateMedicalReportService, CreateMedicalReportService>();
             return services;
         }
     }

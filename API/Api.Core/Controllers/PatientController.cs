@@ -55,8 +55,6 @@ namespace Api.Core.Controllers
 
             var newPatient = await _patientRepository.Insert(patient);
 
-            await _patientRepository.SaveChanges();
-
             return Ok(newPatient);
         } 
     }

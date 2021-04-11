@@ -20,6 +20,7 @@ namespace Domain.Dtos.Inputs
             {
                 Name = this.CompleteName,
                 Password = this.Password,
+                Login = this.Login,
                 ResidenceYear = (ResidenceYear)this.ResidenceYear,
                 Crm = this.Crm,
                 RoleId = (UserRoleType)this.Role

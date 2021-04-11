@@ -49,6 +49,7 @@ namespace Service.Services
 
                                 new Claim(ClaimTypes.Name, existingAuth.Name),
                                 new Claim(ClaimTypes.Role, existingAuth.RoleId.ToString()),
+                                new Claim("UserId", existingAuth.Id.ToString()),
 
                         }),
                         Expires = DateTime.UtcNow.AddHours(3),

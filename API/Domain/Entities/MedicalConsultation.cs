@@ -10,7 +10,7 @@ namespace Domain.Entities
         public Guid DoctorId { get; set; }
         public DateTime ConsultationDate { get; set; }
         public Guid PatientId { get; set; }
-        public virtual List<MedicalExam> MedicalExams { get; set; }
+        public virtual List<MedicalExam> MedicalExams { get; set; } = new List<MedicalExam>();
         public virtual Patient Patient { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual MedicalReport Report { get; private set; }
@@ -20,16 +20,22 @@ namespace Domain.Entities
         {
             MedicalExams.ToList().ForEach(x => x.ValidateStatus());
 
-            return MedicalExams.Any(x => x.ExamStatus == ExamStatus.Accomplished);
+            return !MedicalExams.Any(x => x.ExamStatus == ExamStatus.Scheduled || x.ExamStatus == ExamStatus.Unaccomplished);
         }
 
-        public void MakeReport()
+        public void MakeReport(string report, Guid reportCreatorId )
         {
+            if (Report != null)
+                throw new Exception("A consulta já possui um laudo.");
             if (IsAvailableForMedicalReport())
             {
                 Report = new MedicalReport
                 {
                     MedicalConsultationId = this.Id,
+                    Report = report,
+                    ReportCreatorId = reportCreatorId,
+                    ReportDate = DateTime.Now,
+                    CreatedAt = DateTime.Now
                 };
             }
             else

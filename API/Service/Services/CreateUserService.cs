@@ -48,15 +48,6 @@ namespace Service.Services
             newUser.Password = _cryptograph.EncryptPassword(newUser.Password);
 
             var createdUser = await _userRepository.Insert(newUser);
-            try
-            {
-                await _userRepository.SaveChanges();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-                return GenerateErroServiceResponse("Erro na criação do usuário.");
-            }
 
             return GenerateSuccessServiceResponse(HttpStatusCode.Created);
         }

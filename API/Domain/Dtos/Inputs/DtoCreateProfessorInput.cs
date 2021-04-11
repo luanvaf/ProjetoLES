@@ -19,6 +19,7 @@ namespace Domain.Dtos.Inputs
             return new Professor
             {
                 Name = this.CompleteName,
+                Login = this.Login,
                 Password = this.Password,
                 Titulation = this.Titulation,
                 Crm = this.Crm,

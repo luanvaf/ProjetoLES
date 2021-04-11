@@ -15,6 +15,7 @@ namespace Domain.Dtos.Inputs
             return new Doctor
             {
                 Name = this.CompleteName,
+                Login = this.Login,
                 Password = this.Password,
                 Crm = this.Crm,
                 RoleId = (UserRoleType)this.Role

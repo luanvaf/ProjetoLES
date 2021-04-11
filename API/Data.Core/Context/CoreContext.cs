@@ -18,7 +18,11 @@ namespace Data.Core.Context
         public DbSet<Patient> Patient { get; private set; }
         public DbSet<Professor> Professor { get; private set; }
         public DbSet<Resident> Resident { get; private set; }
-        
+        public DbSet<MedicalConsultation> MedicalConsultations { get; private set; }
+        public DbSet<MedicalExam> MedicalExams { get; private set; }
+        public DbSet<MedicalReport> MedicalReport { get; private set; }
+        public DbSet<MedicalEquipament> MedicalEquipament { get; private set; }
+
         public CoreContext(DbContextOptions<CoreContext> options, ICryptograph cryptograph) : base(options) 
         {
             _cryptograph = cryptograph;
