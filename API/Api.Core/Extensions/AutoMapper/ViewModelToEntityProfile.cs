@@ -40,6 +40,8 @@ namespace Api.Core.Extensions.AutoMapper
                         .MapValue(DtoResidenceYearType.ThirdYear, ResidenceYear.ThirdYear)
                         .MapValue(DtoResidenceYearType.ForthYear, ResidenceYear.ForthYear))
                 .ReverseMap();
+
+            CreateMap<DtoAddMedicalEquipamentInput, MedicalEquipament>();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Domain.Entities
         public DateTime ExamDate { get; set; }
         public ExamStatus ExamStatus { get; set; }
         public string ExamResult { get; set; }
-        public Guid DoctorPerfomedExamId { get; set; }
+        public Guid? DoctorPerfomedExamId { get; set; }
         public Guid MedicalConsultationId { get; set; }
-        public Guid MedicalEquipamentId { get; set; }
+        public Guid? MedicalEquipamentId { get; set; }
         public virtual Doctor DoctorPerfomedExam { get; set; }
 
         public virtual MedicalConsultation MedicalConsultation { get; set; }

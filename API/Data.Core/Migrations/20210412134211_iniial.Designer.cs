@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Core.Migrations
 {
     [DbContext(typeof(CoreContext))]
-    [Migration("20210410213512_initial")]
-    partial class initial
+    [Migration("20210412134211_iniial")]
+    partial class iniial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -114,7 +114,7 @@ namespace Data.Core.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("DoctorPerfomedExamId")
+                    b.Property<Guid?>("DoctorPerfomedExamId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExamDate")
@@ -130,7 +130,7 @@ namespace Data.Core.Migrations
                     b.Property<Guid>("MedicalConsultationId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MedicalEquipamentId")
+                    b.Property<Guid?>("MedicalEquipamentId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -164,6 +164,12 @@ namespace Data.Core.Migrations
                         .HasColumnType("character varying(500)")
                         .HasMaxLength(500);
 
+                    b.Property<Guid>("ReportCreatorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -171,6 +177,8 @@ namespace Data.Core.Migrations
 
                     b.HasIndex("MedicalConsultationId")
                         .IsUnique();
+
+                    b.HasIndex("ReportCreatorId");
 
                     b.ToTable("MedicalReport");
                 });
@@ -288,25 +296,25 @@ namespace Data.Core.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 4, 10, 18, 35, 11, 715, DateTimeKind.Local).AddTicks(9330),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 863, DateTimeKind.Local).AddTicks(6379),
                             Name = "Resident"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2117),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8839),
                             Name = "Doctor"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2221),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8917),
                             Name = "Professor"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2225),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8920),
                             Name = "Administrator"
                         });
                 });
@@ -321,7 +329,7 @@ namespace Data.Core.Migrations
                         new
                         {
                             Id = new Guid("319e2862-5c31-477a-9eeb-d84db67b2fc5"),
-                            CreatedAt = new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(6348),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 865, DateTimeKind.Local).AddTicks(3123),
                             Login = "999999",
                             Name = "administrador",
                             Password = "6CA13D52CA70C883E0F0BB101E425A89E8624DE51DB2D2392593AF6A84118090",
@@ -381,8 +389,7 @@ namespace Data.Core.Migrations
                     b.HasOne("Domain.Entities.Doctor", "DoctorPerfomedExam")
                         .WithMany("MedicalExams")
                         .HasForeignKey("DoctorPerfomedExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.MedicalConsultation", "MedicalConsultation")
                         .WithMany("MedicalExams")
@@ -393,8 +400,7 @@ namespace Data.Core.Migrations
                     b.HasOne("Domain.Entities.MedicalEquipament", "MedicalEquipament")
                         .WithMany("MedicalExams")
                         .HasForeignKey("MedicalEquipamentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicalReport", b =>
@@ -402,6 +408,12 @@ namespace Data.Core.Migrations
                     b.HasOne("Domain.Entities.MedicalConsultation", "MedicalConsultation")
                         .WithOne("Report")
                         .HasForeignKey("Domain.Entities.MedicalReport", "MedicalConsultationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Doctor", "ReportCreator")
+                        .WithMany()
+                        .HasForeignKey("ReportCreatorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

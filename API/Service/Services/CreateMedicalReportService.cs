@@ -1,4 +1,5 @@
 ﻿using Domain.Dtos.Inputs;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Domain.Models.Helps;
@@ -14,23 +15,23 @@ namespace Service.Services
         {
             _medicalConsultationRepository = medicalConsultationRepository;
         }
-        public async Task<ResponseService> Execute(Guid reportCreatorId, DtoCreateMedicalReportInput report)
+        public async Task<ResponseService<MedicalConsultation>> Execute(Guid reportCreatorId, DtoCreateMedicalReportInput report)
         {
             var medicalConsultation = await _medicalConsultationRepository.GetById(report.MedicalConsultationId);
 
             if (medicalConsultation == null)
-                return GenerateErroServiceResponse("A consulta para laudo não encontrada.");
+                return GenerateErroServiceResponse<MedicalConsultation>("A consulta para laudo não encontrada.");
             try
             {
                 medicalConsultation.MakeReport(report.Report, reportCreatorId);
 
                 await _medicalConsultationRepository.Update(medicalConsultation);
 
-                return GenerateSuccessServiceResponse(System.Net.HttpStatusCode.Created);
+                return GenerateSuccessServiceResponse(medicalConsultation);
             }
             catch(Exception ex)
             {
-                return GenerateErroServiceResponse(ex.Message);
+                return GenerateErroServiceResponse<MedicalConsultation>(ex.Message);
             }
         }
     }

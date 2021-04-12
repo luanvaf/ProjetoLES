@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Core.Migrations
 {
-    public partial class initial : Migration
+    public partial class iniial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -143,9 +143,9 @@ namespace Data.Core.Migrations
                     ExamDate = table.Column<DateTime>(nullable: false),
                     ExamStatus = table.Column<int>(nullable: false),
                     ExamResult = table.Column<string>(maxLength: 500, nullable: true),
-                    DoctorPerfomedExamId = table.Column<Guid>(nullable: false),
+                    DoctorPerfomedExamId = table.Column<Guid>(nullable: true),
                     MedicalConsultationId = table.Column<Guid>(nullable: false),
-                    MedicalEquipamentId = table.Column<Guid>(nullable: false)
+                    MedicalEquipamentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,7 +178,9 @@ namespace Data.Core.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
                     MedicalConsultationId = table.Column<Guid>(nullable: false),
-                    Report = table.Column<string>(maxLength: 500, nullable: false)
+                    Report = table.Column<string>(maxLength: 500, nullable: false),
+                    ReportDate = table.Column<DateTime>(nullable: false),
+                    ReportCreatorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,6 +191,12 @@ namespace Data.Core.Migrations
                         principalTable: "MedicalConsultation",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MedicalReport_User_ReportCreatorId",
+                        column: x => x.ReportCreatorId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -196,16 +204,16 @@ namespace Data.Core.Migrations
                 columns: new[] { "Id", "CreatedAt", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 4, 10, 18, 35, 11, 715, DateTimeKind.Local).AddTicks(9330), "Resident", null },
-                    { 2, new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2117), "Doctor", null },
-                    { 3, new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2221), "Professor", null },
-                    { 4, new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(2225), "Administrator", null }
+                    { 1, new DateTime(2021, 4, 12, 10, 42, 10, 863, DateTimeKind.Local).AddTicks(6379), "Resident", null },
+                    { 2, new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8839), "Doctor", null },
+                    { 3, new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8917), "Professor", null },
+                    { 4, new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8920), "Administrator", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreatedAt", "Login", "Name", "Password", "RoleId", "UpdatedAt", "UserType" },
-                values: new object[] { new Guid("319e2862-5c31-477a-9eeb-d84db67b2fc5"), new DateTime(2021, 4, 10, 18, 35, 11, 717, DateTimeKind.Local).AddTicks(6348), "999999", "administrador", "6CA13D52CA70C883E0F0BB101E425A89E8624DE51DB2D2392593AF6A84118090", 4, null, "Administrator" });
+                values: new object[] { new Guid("319e2862-5c31-477a-9eeb-d84db67b2fc5"), new DateTime(2021, 4, 12, 10, 42, 10, 865, DateTimeKind.Local).AddTicks(3123), "999999", "administrador", "6CA13D52CA70C883E0F0BB101E425A89E8624DE51DB2D2392593AF6A84118090", 4, null, "Administrator" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalConsultation_DoctorId",
@@ -237,6 +245,11 @@ namespace Data.Core.Migrations
                 table: "MedicalReport",
                 column: "MedicalConsultationId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicalReport_ReportCreatorId",
+                table: "MedicalReport",
+                column: "ReportCreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patient_AddressId",

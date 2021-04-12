@@ -112,7 +112,7 @@ namespace Data.Core.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<Guid>("DoctorPerfomedExamId")
+                    b.Property<Guid?>("DoctorPerfomedExamId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ExamDate")
@@ -128,7 +128,7 @@ namespace Data.Core.Migrations
                     b.Property<Guid>("MedicalConsultationId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("MedicalEquipamentId")
+                    b.Property<Guid?>("MedicalEquipamentId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -294,25 +294,25 @@ namespace Data.Core.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 4, 11, 15, 19, 15, 124, DateTimeKind.Local).AddTicks(8556),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 863, DateTimeKind.Local).AddTicks(6379),
                             Name = "Resident"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 4, 11, 15, 19, 15, 128, DateTimeKind.Local).AddTicks(4427),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8839),
                             Name = "Doctor"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 4, 11, 15, 19, 15, 128, DateTimeKind.Local).AddTicks(4641),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8917),
                             Name = "Professor"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 4, 11, 15, 19, 15, 128, DateTimeKind.Local).AddTicks(4653),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 864, DateTimeKind.Local).AddTicks(8920),
                             Name = "Administrator"
                         });
                 });
@@ -327,7 +327,7 @@ namespace Data.Core.Migrations
                         new
                         {
                             Id = new Guid("319e2862-5c31-477a-9eeb-d84db67b2fc5"),
-                            CreatedAt = new DateTime(2021, 4, 11, 15, 19, 15, 129, DateTimeKind.Local).AddTicks(5222),
+                            CreatedAt = new DateTime(2021, 4, 12, 10, 42, 10, 865, DateTimeKind.Local).AddTicks(3123),
                             Login = "999999",
                             Name = "administrador",
                             Password = "6CA13D52CA70C883E0F0BB101E425A89E8624DE51DB2D2392593AF6A84118090",
@@ -387,8 +387,7 @@ namespace Data.Core.Migrations
                     b.HasOne("Domain.Entities.Doctor", "DoctorPerfomedExam")
                         .WithMany("MedicalExams")
                         .HasForeignKey("DoctorPerfomedExamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.MedicalConsultation", "MedicalConsultation")
                         .WithMany("MedicalExams")
@@ -399,8 +398,7 @@ namespace Data.Core.Migrations
                     b.HasOne("Domain.Entities.MedicalEquipament", "MedicalEquipament")
                         .WithMany("MedicalExams")
                         .HasForeignKey("MedicalEquipamentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Domain.Entities.MedicalReport", b =>

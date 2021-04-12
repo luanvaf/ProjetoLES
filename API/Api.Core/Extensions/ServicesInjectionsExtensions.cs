@@ -21,6 +21,10 @@ namespace Api.Core.Extensions
             services.AddScoped<ICreateAuthService, CreateAuthService>();
             services.AddScoped<IAddMedicalConsultationService, AddMedicalConsultationService>();
             services.AddScoped<ICreateMedicalReportService, CreateMedicalReportService>();
+            services.AddScoped<IAddMedicalEquipamentService, AddMedicalEquipamentService>();
+            services.AddScoped<IScheduleExamService, ScheduleExamService>();
+            services.AddScoped<IEndExamService, EndExamService>();
+
             return services;
         }
     }

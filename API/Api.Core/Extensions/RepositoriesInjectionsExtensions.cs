@@ -19,6 +19,8 @@ namespace Api.Core.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IMedicalConsultationRepository, MedicalConsultationRepository>();
+            services.AddScoped<IMedicalEquipamentRepository, MedicalEquipamentRepository>();
+            services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
             return services;
         }
     }

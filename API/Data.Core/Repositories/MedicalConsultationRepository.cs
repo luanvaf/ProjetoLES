@@ -16,7 +16,7 @@ namespace Data.Core.Repositories
             _context = context;
         }
 
-        public async Task<IQueryable> GetByPatientCPF(string cpf) 
-            => await Task.FromResult(_context.MedicalConsultations.AsNoTracking().Include(x => x.Patient).Where(x => x.Patient.Cpf == cpf));
+        public async Task<IQueryable<MedicalConsultation>> GetByPatientCPF(string cpf) 
+            => await Task.FromResult(_context.MedicalConsultations.Where(x => x.Patient.Cpf == cpf));
     }
 }

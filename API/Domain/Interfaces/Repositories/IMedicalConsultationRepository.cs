@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IMedicalConsultationRepository : IBaseRepository<MedicalConsultation, Guid>
     {
-        Task<IQueryable> GetByPatientCPF(string cpf);
+        Task<IQueryable<MedicalConsultation>> GetByPatientCPF(string cpf);
     }
 }

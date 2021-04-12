@@ -56,13 +56,25 @@ namespace Api.Core.Controllers
             ([FromBody] DtoAddMedicalConsultationInput medicalConsultation)
         {
             var doctorId = Guid.Parse(User.Claims.First(x=>x.Type == "UserId").Value);
-            return Created("/{id}", await _addMedicalConsultationService.Execute(doctorId, medicalConsultation));
+            var responseService = await _addMedicalConsultationService.Execute(doctorId, medicalConsultation);
+            if (responseService.Success)
+                return Created("api/[controller]/{id}", responseService.Value);
+            return BadRequest(responseService.Value);
         }
+        /// <summary>
+        /// Endpoint responsável por insirir um laudo para uma consulta
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
         [HttpPost("report")]
         public async Task<IActionResult> CreateReport([FromBody] DtoCreateMedicalReportInput report)
         {
             var reportCreatorId = Guid.Parse(User.Claims.First(x => x.Type == "UserId").Value);
-            return Created("/{id}", await _createMedicalReportService.Execute(reportCreatorId, report));
+            var responseService = await _createMedicalReportService.Execute(reportCreatorId, report);
+            if (responseService.Success)
+                return Created("api/[controller]/{id}", responseService.Value);
+
+            return BadRequest(responseService.Message);
         }
 
 

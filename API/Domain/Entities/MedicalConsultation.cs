@@ -10,7 +10,7 @@ namespace Domain.Entities
         public Guid DoctorId { get; set; }
         public DateTime ConsultationDate { get; set; }
         public Guid PatientId { get; set; }
-        public virtual List<MedicalExam> MedicalExams { get; set; } = new List<MedicalExam>();
+        public virtual ICollection<MedicalExam> MedicalExams { get; set; } = new List<MedicalExam>();
         public virtual Patient Patient { get; set; }
         public virtual Doctor Doctor { get; set; }
         public virtual MedicalReport Report { get; private set; }
@@ -44,8 +44,10 @@ namespace Domain.Entities
             }
         }
 
-        public void ScheduleExam(Guid medicalEquipamentId, DateTime exameDate)
+        public void ScheduleExam(Guid? medicalEquipamentId, DateTime exameDate)
         {
+            if (exameDate < DateTime.Now)
+                throw new Exception("A data de agendamento do exame é invalida.");
             MedicalExams.Add(new MedicalExam
             {
                 MedicalConsultationId = this.Id,
