@@ -15,6 +15,7 @@ const RegisterDoctor: React.FC = () => {
         CompleteName: '',
         ConfirmPassword: '',
         Crm: '',
+        Login: '',
         Password: '',
         Titulation: ''
     });
@@ -22,6 +23,7 @@ const RegisterDoctor: React.FC = () => {
         CompleteName: '',
         ConfirmPassword: '',
         Crm: '',
+        Login: '',
         Password: '',
         ResidenceYear: 0
     });
@@ -29,6 +31,7 @@ const RegisterDoctor: React.FC = () => {
         CompleteName: '',
         ConfirmPassword: '',
         Crm: '',
+        Login: '',
         Password: ''
     });
 
@@ -107,105 +110,117 @@ const RegisterDoctor: React.FC = () => {
     }
 
     return (
-        <div id="page-register-doctor">
-            <header></header>
+        <div className="background-register">
+            <div id="page-register-doctor">
+                <header></header>
 
-            <form onSubmit={handleSubmit}>
-                <h1>Cadastro dos Médicos</h1>
-                <fieldset>
-                    <div className="field-group">
+                <form onSubmit={handleSubmit}>
+                    <h1>Cadastro dos Médicos</h1>
+                    <fieldset>
+                        <div className="field-group">
+                            <div className="field">
+                                <label htmlFor="CompleteName">Nome</label>
+                                <input
+                                    type="text"
+                                    name="CompleteName"
+                                    id="CompleteName"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div className="field">
+                                <label htmlFor="Crm">CRM</label>
+                                <input
+                                    type="number"
+                                    name="Crm"
+                                    id="Crm"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        </div>
                         <div className="field">
-                            <label htmlFor="CompleteName">Nome</label>
+                            <label htmlFor="tipo">Tipo</label>
+                            <select
+                                name="tipo"
+                                id="tipo"
+                                value={selectedDoctorType}
+                                onChange={handleSelectType}
+                                required
+                            >
+                                <option value="">Selecione um tipo</option>
+                                {doctorsType.map(doctor => (
+                                    <option key={doctor} value={doctor}>{doctor}</option>
+                                ))}
+                            </select>
+                        </div>
+                        {selectedDoctorType === 'Professor' ? (
+                            <div className="field">
+                                <label htmlFor="Titulation">Titutalação</label>
+                                <input
+                                    type="text"
+                                    name="Titulation"
+                                    id="Titulation"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        ) : (
+                            null
+                        )}
+                        {selectedDoctorType === 'Residente' ? (
+                            <div className="field">
+                                <label htmlFor="ResidenceYear">Anos de Residência</label>
+                                <input
+                                    type="number"
+                                    name="ResidenceYear"
+                                    id="ResidenceYear"
+                                    onChange={handleInputChange}
+                                    required min={1} max={4}
+                                />
+                            </div>
+                        ) : (
+                            null
+                        )}
+                        <div className="field">
+                            <label htmlFor="Login">Login</label>
                             <input
                                 type="text"
-                                name="CompleteName"
-                                id="CompleteName"
+                                name="Login"
+                                id="Login"
                                 onChange={handleInputChange}
                                 required
                             />
                         </div>
-                        <div className="field">
-                            <label htmlFor="Crm">CRM</label>
-                            <input
-                                type="number"
-                                name="Crm"
-                                id="Crm"
-                                onChange={handleInputChange}
-                                required
-                            />
+                        <div className="field-group">
+                            <div className="field">
+                                <label htmlFor="Password">Senha</label>
+                                <input
+                                    type="password"
+                                    name="Password"
+                                    id="Password"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div className="field">
+                                <label htmlFor="ConfirmPassword">Confirmar Senha</label>
+                                <input
+                                    type="password"
+                                    name="ConfirmPassword"
+                                    id="ConfirmPassword"
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="tipo">Tipo</label>
-                        <select
-                            name="tipo"
-                            id="tipo"
-                            value={selectedDoctorType}
-                            onChange={handleSelectType}
-                            required
-                        >
-                            <option value="">Selecione um tipo</option>
-                            {doctorsType.map(doctor => (
-                                <option key={doctor} value={doctor}>{doctor}</option>
-                            ))}
-                        </select>
-                    </div>
-                    {selectedDoctorType === 'Professor' ? (
-                        <div className="field">
-                            <label htmlFor="Titulation">Titutalação</label>
-                            <input
-                                type="text"
-                                name="Titulation"
-                                id="Titulation"
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    ) : (
-                        null
-                    )}
-                    {selectedDoctorType === 'Residente' ? (
-                        <div className="field">
-                            <label htmlFor="ResidenceYear">Anos de Residência</label>
-                            <input
-                                type="number"
-                                name="ResidenceYear"
-                                id="ResidenceYear"
-                                onChange={handleInputChange}
-                                required min={1} max={4}
-                            />
-                        </div>
-                    ) : (
-                        null
-                    )}
-                    <div className="field-group">
-                        <div className="field">
-                            <label htmlFor="Password">Senha</label>
-                            <input
-                                type="password"
-                                name="Password"
-                                id="Password"
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="ConfirmPassword">Confirmar Senha</label>
-                            <input
-                                type="password"
-                                name="ConfirmPassword"
-                                id="ConfirmPassword"
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
 
-                <button type="submit">
-                    Cadastrar Médico
+                    <button type="submit">
+                        Cadastrar Médico
                 </button>
-            </form>
+                </form>
+            </div>
         </div>
     );
 }

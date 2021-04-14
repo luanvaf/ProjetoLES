@@ -10,7 +10,7 @@ const Login: React.FC = () => {
     const contextAuth = useAuth();
 
     const [formAuth, setAuth] = useState<Auth>({
-        Crm: '',
+        Login: '',
         Password: ''
     });
 
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
     async function handleSignIn(event: FormEvent) {
         event.preventDefault();
 
-        contextAuth.Login(formAuth.Crm, formAuth.Password)
+        contextAuth.Login(formAuth.Login, formAuth.Password)
             .catch(() => {
                 Swal.fire({
                     icon: 'error',
@@ -36,38 +36,40 @@ const Login: React.FC = () => {
     }
 
     return (
-        <div id="page-login">
-            <header></header>
+        <div className="background">
+            <div id="page-login">
+                <header></header>
 
-            <form onSubmit={handleSignIn}>
-                <h1>Login</h1>
-                <fieldset>
-                    <div className="field">
-                        <label htmlFor="Crm">Crm</label>
-                        <input
-                            type="number"
-                            name="Crm"
-                            id="Crm"
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="field">
-                        <label htmlFor="Password">Senha</label>
-                        <input
-                            type="password"
-                            name="Password"
-                            id="Password"
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                </fieldset>
+                <form onSubmit={handleSignIn}>
+                    <h1>Login</h1>
+                    <fieldset>
+                        <div className="field">
+                            <label htmlFor="Login">Crm</label>
+                            <input
+                                type="number"
+                                name="Login"
+                                id="Login"
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div className="field">
+                            <label htmlFor="Password">Senha</label>
+                            <input
+                                type="password"
+                                name="Password"
+                                id="Password"
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                    </fieldset>
 
-                <button type="submit">
-                    Entrar
+                    <button type="submit">
+                        Entrar
                 </button>
-            </form>
+                </form>
+            </div>
         </div>
     )
 }

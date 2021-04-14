@@ -1,4 +1,4 @@
 export default interface Auth {
-    Crm: string;
+    Login: string;
     Password: string;
 }

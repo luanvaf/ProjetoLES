@@ -5,16 +5,18 @@ import './styles.css';
 
 const Home: React.FC = () => {
     return (
-        <div id="page-home">
-            <header></header>
-            
-            <h1>Sistema de Gestão</h1>
-            
-            <Link to='/CadastroMedico'>
-                <button>
-                    Cadastrar Novo Médico
+        <div className="background-home">
+            <div id="page-home">
+                <header></header>
+
+                <Link to='/CadastroMedico'>
+                    <button>
+                        Cadastrar Novo Médico
                 </button>
-            </Link>
+                </Link>
+
+                <h1>Sistema de Gestão de Laudos</h1>
+            </div>
         </div>
     )
 }

@@ -16,7 +16,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     const [role, setRole] = useState<string>('');
     async function Login(crm: string, password: string) {
         const response = await api.post('/api/Auth', {
-            Crm: crm,
+            Login: crm,
             Password: password,
         })
 
