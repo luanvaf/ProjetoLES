@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Core", "Api.Core\Api.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Core", "Data.Core\Data.Core.csproj", "{DB417139-5029-45CB-87B5-CE45164325E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "XUnitTestProject\XUnitTestProject.csproj", "{D9CDC35D-D849-42ED-A678-4FEFA6DCC6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DB417139-5029-45CB-87B5-CE45164325E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB417139-5029-45CB-87B5-CE45164325E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB417139-5029-45CB-87B5-CE45164325E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9CDC35D-D849-42ED-A678-4FEFA6DCC6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9CDC35D-D849-42ED-A678-4FEFA6DCC6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9CDC35D-D849-42ED-A678-4FEFA6DCC6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9CDC35D-D849-42ED-A678-4FEFA6DCC6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
