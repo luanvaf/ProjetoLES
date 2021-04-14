@@ -28,7 +28,7 @@ const Login: React.FC = () => {
             .catch(() => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Cmr ou Senha inválido!',
+                    title: 'Login ou Senha inválido!',
                     text: 'Tente novamente'
                 })
             });
@@ -44,7 +44,7 @@ const Login: React.FC = () => {
                     <h1>Login</h1>
                     <fieldset>
                         <div className="field">
-                            <label htmlFor="Login">Crm</label>
+                            <label htmlFor="Login">Login</label>
                             <input
                                 type="number"
                                 name="Login"

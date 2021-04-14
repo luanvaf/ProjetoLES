@@ -12,8 +12,28 @@ const Home: React.FC = () => {
                 <Link to='/CadastroMedico'>
                     <button>
                         Cadastrar Novo Médico
-                </button>
-                </Link>                
+                    </button>
+                </Link>
+                <Link to='/CadastrarPaciente'>
+                    <button>
+                        Cadastrar Novo Paciente
+                    </button>
+                </Link>
+                <Link to='/CadastrarExame'>
+                    <button>
+                        Cadastrar Novo Exame
+                    </button>
+                </Link>
+                <Link to='/CadastrarEquipamento'>
+                    <button>
+                        Cadastrar Novo Equipamento
+                    </button>
+                </Link>
+                <Link to='/CadastrarConsulta'>
+                    <button>
+                        Cadastrar Nova Consulta
+                    </button>
+                </Link>
             </div>
         </div>
     )
