@@ -1,0 +1,109 @@
+.background {
+    background-image: linear-gradient(to right top, #548de7, #5089e7, #4c86e7, #4882e6, #447ee6, #3f7ae6, #3b77e5, #3673e5, #2f6ee5, #286ae5, #2165e5, #1960e5);
+    height: 100vh;
+    display: flex;
+}
+
+
+#page-register-equipament {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+#page-register-equipament header {
+    margin-top: 48px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-register-equipament form {
+    margin: 80px auto;
+    padding: 64px;
+    max-width: 730px;
+    background: #FFF;
+    border-radius: 8px;
+  
+    display: flex;
+    flex-direction: column;
+}
+
+#page-register-equipament form h1 {
+    font-size: 36px;
+}
+
+#page-register-equipament form fieldset {
+    margin-top: 64px;
+    min-inline-size: auto;
+    border: 0;
+}
+
+#page-register-equipament form legend {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+#page-register-equipament form .field {
+    flex: 1;
+  
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+#page-register-equipament form .field input[type=text],
+#page-register-equipament form .field input[type=date]{
+    flex: 1;
+    background: #F0F0F5;
+    border-radius: 8px;
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+    color: #6C6C80;
+}
+
+#page-register-equipament form .field input::placeholder {
+    color: #A0A0B2;
+}
+
+#page-register-equipament form .field label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+#page-register-equipament form .field :disabled {
+    cursor: not-allowed;
+}
+  
+#page-register-equipament form .leaflet-container {
+    width: 100%;
+    height: 350px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+  
+#page-register-equipament form button {
+    width: 260px;
+    height: 56px;
+    background: grey;
+    border-radius: 8px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    align-self: flex-end;
+    margin-top: 40px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+  
+#page-register-equipament form button:hover {
+    background: #1960e5;
+}
+
