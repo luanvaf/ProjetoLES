@@ -11,6 +11,12 @@
     margin: 0 auto;
 }
 
+
+#page-home a{
+    padding-left: 100px;
+    align-items: center;
+}
+
 #page-home header {
     margin-top: 48px;
   
